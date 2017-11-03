@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ShelfChanger } from './ShelfChanger';
 
 export const Book = (props) => {
