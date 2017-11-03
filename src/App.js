@@ -1,7 +1,7 @@
 import React from 'react';
 import * as BooksAPI from './BooksAPI';
 import { SearchBooks } from './SearchBooks';
-import { Book } from './Book';
+import { Bookshelf } from './Bookshelf';
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -17,7 +17,7 @@ class BooksApp extends React.Component {
   }
 
   componentDidMount() {
-    BooksAPI.getAll().then(books => this.setState(books));
+    BooksAPI.getAll().then(books => this.setState({ books }));
   }
 
   handleSearchPage = () => {
@@ -27,6 +27,13 @@ class BooksApp extends React.Component {
   }
 
   render() {
+
+    const bookShelfs = {
+      'currentlyReading': 'Currently Reading',
+      'wantToRead': 'Want to Read',
+      'read': 'Read'
+    }
+
     return (
       <div className="app">
         {this.state.showSearchPage ? (
@@ -38,48 +45,21 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                        <Book />
-                      </li>
-                      <li>
-                        <Book />
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                        <Book />
-                      </li>
-                      <li>
-                        <Book />
-                      </li>
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      <li>
-                        <Book />
-                      </li>
-                      <li>
-                        <Book />
-                      </li>
-                      <li>
-                        <Book />
-                      </li>
-                    </ol>
-                  </div>
-                </div>
+                <Bookshelf 
+                  books={this.state.books} 
+                  shelf='currentlyReading'
+                  title={bookShelfs.currentlyReading} 
+                />
+                <Bookshelf 
+                  books={this.state.books} 
+                  shelf='wantToRead'
+                  title={bookShelfs.wantToRead} 
+                />
+                <Bookshelf 
+                  books={this.state.books} 
+                  shelf='read'
+                  title={bookShelfs.read} 
+                />
               </div>
             </div>
             <div className="open-search">
