@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ShelfChanger } from './ShelfChanger';
 
 export class Book extends Component {
     render() {
@@ -15,15 +16,10 @@ export class Book extends Component {
                             }
                         }>
                     </div>
-                    <div className="book-shelf-changer">
-                        <select onChange={(e) => this.props.moveBook(book, e.target.value)}>
-                        <option value="none">Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
-                        </select>
-                    </div>
+                    <ShelfChanger 
+                        book={book} 
+                        moveBook={this.props.moveBook} 
+                    />
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{book.authors}</div>
