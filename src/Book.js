@@ -16,8 +16,8 @@ export class Book extends Component {
                         }>
                     </div>
                     <div className="book-shelf-changer">
-                        <select>
-                        <option value="none" disabled>Move to...</option>
+                        <select onChange={(e) => this.props.moveBook(book, e.target.value)}>
+                        <option value="none">Move to...</option>
                         <option value="currentlyReading">Currently Reading</option>
                         <option value="wantToRead">Want to Read</option>
                         <option value="read">Read</option>

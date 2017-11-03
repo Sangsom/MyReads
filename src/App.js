@@ -26,6 +26,20 @@ class BooksApp extends React.Component {
     }))
   }
 
+  moveBook = (book, shelf) => {
+    // console.log(book.shelf);
+    // book.shelf = 'read';
+    // console.log(book.shelf);
+    console.log(shelf);
+    book.shelf = shelf;
+    
+    this.setState((state) => ({
+      books: state.books.map(c => {
+        return c;
+      })
+    }))
+  }
+
   render() {
 
     const bookShelfs = {
@@ -48,17 +62,20 @@ class BooksApp extends React.Component {
                 <Bookshelf 
                   books={this.state.books} 
                   shelf='currentlyReading'
-                  title={bookShelfs.currentlyReading} 
+                  title={bookShelfs.currentlyReading}
+                  moveBook={this.moveBook} 
                 />
                 <Bookshelf 
                   books={this.state.books} 
                   shelf='wantToRead'
-                  title={bookShelfs.wantToRead} 
+                  title={bookShelfs.wantToRead}
+                  moveBook={this.moveBook}
                 />
                 <Bookshelf 
                   books={this.state.books} 
                   shelf='read'
-                  title={bookShelfs.read} 
+                  title={bookShelfs.read}
+                  moveBook={this.moveBook}
                 />
               </div>
             </div>
