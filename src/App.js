@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import { SearchBooks } from './SearchBooks';
 import { Bookshelf } from './Bookshelf';
+import sortBy from 'sort-by';
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -39,6 +40,14 @@ class BooksApp extends React.Component {
       'read': 'Read'
     }
 
+    const { query } = this.state;
+
+    let showingBooks;
+
+    showingBooks = this.state.books;
+
+    showingBooks.sort(sortBy('title'));
+
     return (
       <div className="app">
           <Route exact path="/" render={() => (
@@ -49,19 +58,19 @@ class BooksApp extends React.Component {
               <div className="list-books-content">
                 <div>
                   <Bookshelf 
-                    books={this.state.books} 
+                    books={showingBooks} 
                     shelf='currentlyReading'
                     title={bookShelfs.currentlyReading}
                     moveBook={this.moveBook} 
                   />
                   <Bookshelf 
-                    books={this.state.books} 
+                    books={showingBooks} 
                     shelf='wantToRead'
                     title={bookShelfs.wantToRead}
                     moveBook={this.moveBook}
                   />
                   <Bookshelf 
-                    books={this.state.books} 
+                    books={showingBooks} 
                     shelf='read'
                     title={bookShelfs.read}
                     moveBook={this.moveBook}
