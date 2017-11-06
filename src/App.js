@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import { SearchBooks } from './SearchBooks';
 import { Bookshelf } from './Bookshelf';
+import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 import './App.css'
 
@@ -25,26 +26,15 @@ class BooksApp extends React.Component {
     BooksAPI.update(book, shelf);
   }
 
-  updateQuery = (query) => {
-    this.setState({ query: query});
-
-    BooksAPI.search(this.state.query).then((books) => {
-      this.setState({ searchBooks: books});
-    })
-  }
-
   render() {
     const bookShelfs = {
       'currentlyReading': 'Currently Reading',
       'wantToRead': 'Want to Read',
       'read': 'Read'
     }
-
     const { query } = this.state;
 
-    let showingBooks;
-
-    showingBooks = this.state.books;
+    let showingBooks = this.state.books;
 
     showingBooks.sort(sortBy('title'));
 
@@ -84,12 +74,7 @@ class BooksApp extends React.Component {
           )} />
 
           <Route path="/search" render={() => (
-            <SearchBooks 
-              query={this.state.query} 
-              updateQuery={this.updateQuery} 
-              searchBooks={this.state.searchBooks} 
-              moveBook={this.moveBook} 
-            />
+            <SearchBooks />
           )} />
       </div>
     )
