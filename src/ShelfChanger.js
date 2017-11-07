@@ -4,11 +4,8 @@ export const ShelfChanger = (props) => {
     const {book, moveBook} = props;
 
     let defaultValue;
-    if (book.shelf) {
-        defaultValue = book.shelf;
-    } else {
-        defaultValue = 'none';
-    }
+    if (book.shelf) defaultValue = book.shelf;
+    else defaultValue = 'none';
 
     return (
         <div className="book-shelf-changer">

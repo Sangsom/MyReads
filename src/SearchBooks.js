@@ -56,8 +56,8 @@ export class SearchBooks extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         {
-                            booksFound.map(book => (
-                                <li key={book.id}>
+                            booksFound.map((book, index) => (
+                                <li key={index}>
                                     <Book book={book} moveBook={this.props.moveBook} />
                                 </li>
                             ))
