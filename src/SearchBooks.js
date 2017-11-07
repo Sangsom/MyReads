@@ -1,15 +1,41 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
 import { Book } from './Book';
+import sortBy from 'sort-by';
 
 export class SearchBooks extends Component {
+    state = {
+        found: [],
+        query: ''
+    }
+
+    updateQuery (query) {
+        this.setState({ query: query.trim() });
+
+        BooksAPI.search(this.state.query).then(books => {
+            if (books && !books.error) {
+                this.setState({ found: books });
+            }
+        })
+    }
+
+    moveBook = (book, shelf) => {
+        console.log(shelf);
+      }
+
     render() {
+        const {query, found} = this.state;
+        
+        let booksFound = found.sort(sortBy('title'));
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
                     <Link   
                         to="/"
                         className="close-search">Close</Link>
+                        { JSON.stringify(query)}
                     <div className="search-books-input-wrapper">
                         {/*
                         NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -22,12 +48,20 @@ export class SearchBooks extends Component {
                         <input 
                             type="text" 
                             placeholder="Search by title or author"
+                            onChange={(e) => this.updateQuery(e.target.value)}
                         />
                     </div>
                 </div>
+                
                 <div className="search-books-results">
                     <ol className="books-grid">
-
+                        {
+                            booksFound.map(book => (
+                                <li key={book.id}>
+                                    <Book book={book} moveBook={this.moveBook} />
+                                </li>
+                            ))
+                        }
                     </ol>
                 </div>
             </div>

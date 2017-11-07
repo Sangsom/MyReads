@@ -3,15 +3,12 @@ import { Link, Route } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import { SearchBooks } from './SearchBooks';
 import { Bookshelf } from './Bookshelf';
-import escapeRegExp from 'escape-string-regexp';
 import sortBy from 'sort-by';
 import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books: [],
-    query: '',
-    searchBooks: []
+    books: []
   }
 
   componentDidMount() {
@@ -32,10 +29,8 @@ class BooksApp extends React.Component {
       'wantToRead': 'Want to Read',
       'read': 'Read'
     }
-    const { query } = this.state;
 
     let showingBooks = this.state.books;
-
     showingBooks.sort(sortBy('title'));
 
     return (
