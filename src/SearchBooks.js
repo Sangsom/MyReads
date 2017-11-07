@@ -4,6 +4,10 @@ import * as BooksAPI from './BooksAPI';
 import { Book } from './Book';
 import sortBy from 'sort-by';
 
+/**
+ * TODO: If in search page book is also in main page let it show current shelf it is
+ */
+
 export class SearchBooks extends Component {
     state = {
         found: [],
@@ -19,10 +23,6 @@ export class SearchBooks extends Component {
             }
         })
     }
-
-    moveBook = (book, shelf) => {
-        console.log(shelf);
-      }
 
     render() {
         const {query, found} = this.state;
@@ -58,7 +58,7 @@ export class SearchBooks extends Component {
                         {
                             booksFound.map(book => (
                                 <li key={book.id}>
-                                    <Book book={book} moveBook={this.moveBook} />
+                                    <Book book={book} moveBook={this.props.moveBook} />
                                 </li>
                             ))
                         }
