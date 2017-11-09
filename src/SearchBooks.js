@@ -5,14 +5,16 @@ import PropTypes from 'prop-types';
 import { Book } from './Book';
 import sortBy from 'sort-by';
 
-/**
- * TODO: If in search page book is also in main page let it show current shelf it is
- */
-
 export class SearchBooks extends Component {
+    static propTypes = {
+        mainBooks: PropTypes.array.isRequired,
+        moveBook: PropTypes.func.isRequired
+    }
+
     state = {
         found: [],
-        query: ''
+        query: '',
+        mainBooks: []
     }
 
     updateQuery (query) {
@@ -25,15 +27,31 @@ export class SearchBooks extends Component {
         })
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        // console.log(nextProps.mainBooks);
-        // console.log(nextState.found);
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.mainBooks) {
+            this.setState({ mainBooks: nextProps.mainBooks });
+        }
+    }
+
+    // Helper function for finding book shelf from main page
+    getShelf(id) {
+        let bookshelf;
+        this.state.mainBooks.map(book => {
+            if(book.id === id) {
+                bookshelf = book.shelf
+            }
+        })
+        return bookshelf;
     }
 
     render() {
         const {query, found} = this.state;
-
         let booksFound = found.sort(sortBy('title'));
+
+        // Iterate through found books and compare to books from main page and add correct book shelfs
+        booksFound.map(book => {
+            return this.getShelf(book.id) != undefined ? book.shelf = this.getShelf(book.id) : book;
+        });
 
         return (
             <div className="search-books">
@@ -63,9 +81,4 @@ export class SearchBooks extends Component {
             </div>
         );
     }
-}
-
-SearchBooks.propTypes = {
-    mainBooks: PropTypes.array.isRequired,
-    moveBook: PropTypes.func.isRequired
 }
