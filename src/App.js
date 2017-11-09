@@ -18,6 +18,14 @@ class BooksApp extends React.Component {
   moveBook = (book, shelf) => {
     book.shelf = shelf;
     this.setState((state) => ({
+      books: state.books.map(book => book)
+    }))
+    BooksAPI.update(book, shelf);
+  }
+
+  moveFromSearch = (book, shelf) => {
+    book.shelf = shelf;
+    this.setState((state) => ({
       books: [...state.books, book]
     }))
     BooksAPI.update(book, shelf);
@@ -69,7 +77,7 @@ class BooksApp extends React.Component {
           )} />
 
           <Route path="/search" render={() => (
-            <SearchBooks mainBooks={showingBooks} moveBook={this.moveBook} />
+            <SearchBooks mainBooks={showingBooks} moveBook={this.moveFromSearch} />
           )} />
       </div>
     )
