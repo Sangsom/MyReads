@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Book } from './Book';
 
-export class Bookshelf extends Component {
-    render() {
-        const books = this.props.books.filter(e => e.shelf === this.props.shelf);
-        return (
-            <div className="bookshelf">
-                <h2 className="bookshelf-title">{this.props.title}</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        { books.map((book, index) => (
-                            <li key={index}>
-                                <Book book={book} moveBook={this.props.moveBook} />
-                            </li>
-                        ))}
-                    </ol>
-                </div>
+export const Bookshelf = (props) => {
+    const { title, moveBook, shelf } = props;
+    const books = props.books.filter(e => e.shelf === shelf);
+    
+    return (
+        <div className="bookshelf">
+            <h2 className="bookshelf-title">{title}</h2>
+            <div className="bookshelf-books">
+                <ol className="books-grid">
+                    { books.map((book, index) => (
+                        <li key={index}>
+                            <Book book={book} moveBook={moveBook} />
+                        </li>
+                    ))}
+                </ol>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 Bookshelf.propTypes = {
