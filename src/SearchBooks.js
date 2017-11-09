@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
+import PropTypes from 'prop-types';
 import { Book } from './Book';
 import sortBy from 'sort-by';
 
@@ -62,4 +63,9 @@ export class SearchBooks extends Component {
             </div>
         );
     }
+}
+
+SearchBooks.propTypes = {
+    mainBooks: PropTypes.array.isRequired,
+    moveBook: PropTypes.func.isRequired
 }
