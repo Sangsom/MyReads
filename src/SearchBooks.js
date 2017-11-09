@@ -40,17 +40,18 @@ export class SearchBooks extends Component {
             if(book.id === id) {
                 bookshelf = book.shelf
             }
+            return book;
         })
         return bookshelf;
     }
 
     render() {
-        const {query, found} = this.state;
+        const {found} = this.state;
         let booksFound = found.sort(sortBy('title'));
 
         // Iterate through found books and compare to books from main page and add correct book shelfs
         booksFound.map(book => {
-            return this.getShelf(book.id) != undefined ? book.shelf = this.getShelf(book.id) : book;
+            return this.getShelf(book.id) !== undefined ? book.shelf = this.getShelf(book.id) : book;
         });
 
         return (
@@ -59,7 +60,6 @@ export class SearchBooks extends Component {
                     <Link   
                         to="/"
                         className="close-search">Close</Link>
-                        { JSON.stringify(query)}
                     <div className="search-books-input-wrapper">
                         <input 
                             type="text" 
