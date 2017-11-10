@@ -7,7 +7,6 @@ import sortBy from 'sort-by';
 
 import './App.css'
 
-
 class BooksApp extends React.Component {
   state = {
     books: []
