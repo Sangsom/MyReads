@@ -56,7 +56,13 @@ export const Book = (props) => {
                 />
             </div>
             <div className="book-title">{book.title}</div>
-            <div className="book-authors">{book.authors}</div>
+            <div className="book-authors">
+                {(book.authors) && (
+                    book.authors.map((author, index) => (
+                        <span>{author}<br/></span>
+                    ))
+                )}
+            </div>
         </div>
     );
 }
