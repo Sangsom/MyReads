@@ -9,7 +9,7 @@ export const Book = (props) => {
     return (
         <div className="book">
             <div className="book-top">
-                <Modal trigger={
+                <Modal dimmer='blurring' trigger={
                     <div className="book-cover" 
                         style={
                             { 
