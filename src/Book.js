@@ -59,7 +59,7 @@ export const Book = (props) => {
             <div className="book-authors">
                 {(book.authors) && (
                     book.authors.map((author, index) => (
-                        <span>{author}<br/></span>
+                        <span key={index}>{author}<br/></span>
                     ))
                 )}
             </div>
