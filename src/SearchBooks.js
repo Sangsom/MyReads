@@ -17,6 +17,10 @@ export class SearchBooks extends Component {
         mainBooks: []
     }
 
+    componentDidMount() {
+        this.setState({mainBooks: this.props.mainBooks});
+    }
+
     updateQuery (query) {
         const cleanQuery = query.trim();
 
@@ -26,12 +30,6 @@ export class SearchBooks extends Component {
                 this.setState({ found: books });
             }
         })
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.mainBooks) {
-            this.setState({ mainBooks: nextProps.mainBooks });
-        }
     }
 
     // Helper function for finding book shelf from main page
@@ -49,6 +47,7 @@ export class SearchBooks extends Component {
     render() {
         const {found} = this.state;
         let booksFound = found.sort(sortBy('title'));
+        
 
         // Iterate through found books and compare to books from main page and add correct book shelfs
         booksFound.map(book => {
