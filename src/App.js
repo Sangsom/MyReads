@@ -25,23 +25,11 @@ class BooksApp extends React.Component {
   }
 
   moveFromSearch = (book, shelf) => {
-    if (!this.isFromMain(book.id)) {
-      book.shelf = shelf;
-      this.setState((state) => ({
-        books: [...state.books, book]
-      }))
-      BooksAPI.update(book, shelf);
-    }
-  }
-
-  isFromMain(id) {
-    // Helper function to check if the book is already in main page.
-    for (let i = 0; i < this.state.books.length; i++) {
-      if (this.state.books[i].id === id) {
-        return true;
-      }
-    }
-    return false;
+    book.shelf = shelf;
+    this.setState((state) => ({
+      books: [...state.books.filter(mainBook => mainBook.id !== book.id), book]
+    }))
+    BooksAPI.update(book, shelf);
   }
 
   render() {
