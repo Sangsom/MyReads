@@ -18,9 +18,10 @@ export class SearchBooks extends Component {
     }
 
     updateQuery (query) {
-        this.setState({ query: query.trim() });
+        const cleanQuery = query.trim();
 
-        BooksAPI.search(this.state.query).then(books => {
+        this.setState({ query: cleanQuery });
+        BooksAPI.search(cleanQuery).then(books => {
             if (books && !books.error) {
                 this.setState({ found: books });
             }
