@@ -33,14 +33,25 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    const bookShelfs = {
-      'currentlyReading': 'Currently Reading',
-      'wantToRead': 'Want to Read',
-      'read': 'Read'
-    }
+    const books = this.state.books;
 
-    let showingBooks = this.state.books;
-    showingBooks.sort(sortBy('title'));
+    const shelves = [
+      {
+        id: 'currentlyReading',
+        title: 'Currently Reading',
+        books: books.filter(book => book.shelf === 'currentlyReading')
+      },
+      {
+        id: 'wantToRead',
+        title: 'Want to Read',
+        books: books.filter(book => book.shelf === 'wantToRead')
+      },
+      {
+        id: 'read',
+        title: 'Read',
+        books: books.filter(book => book.shelf === 'read')
+      }
+    ]
 
     return (
       <div className="app">
@@ -51,24 +62,15 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <Bookshelf 
-                    books={showingBooks} 
-                    shelf='currentlyReading'
-                    title={bookShelfs.currentlyReading}
-                    moveBook={this.moveBook} 
-                  />
-                  <Bookshelf 
-                    books={showingBooks} 
-                    shelf='wantToRead'
-                    title={bookShelfs.wantToRead}
-                    moveBook={this.moveBook}
-                  />
-                  <Bookshelf 
-                    books={showingBooks} 
-                    shelf='read'
-                    title={bookShelfs.read}
-                    moveBook={this.moveBook}
-                  />
+                  {shelves.map(shelf => (
+                    <Bookshelf 
+                      key={shelf.id} 
+                      shelf={shelf.id} 
+                      title={shelf.title} 
+                      books={shelf.books.sort(sortBy('title'))} 
+                      moveBook={this.moveBook} 
+                    />
+                  ))}
                 </div>
               </div>
               <div className="open-search">
@@ -78,7 +80,7 @@ class BooksApp extends React.Component {
           )} />
 
           <Route path="/search" render={() => (
-            <SearchBooks mainBooks={showingBooks} moveBook={this.moveFromSearch} />
+            <SearchBooks mainBooks={books} moveBook={this.moveFromSearch} />
           )} />
       </div>
     )
