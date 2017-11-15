@@ -24,10 +24,15 @@ class BooksApp extends React.Component {
   } 
 
   moveFromSearch = (book, shelf) => {
-    book.shelf = shelf;
-    this.setState((state) => ({
-      books: [...state.books.filter(mainBook => mainBook.id !== book.id), book]
-    }))
+    const newBooks = this.state.books.map(newBook => {
+      if (newBook.id === book.id) newBook.shelf = shelf;
+      return newBook;
+    });
+
+    this.setState((state) => {
+      return { books: newBooks }
+    });
+
     BooksAPI.update(book, shelf);
   }
 
