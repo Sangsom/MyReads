@@ -10,15 +10,7 @@ export const Book = (props) => {
         <div className="book">
             <div className="book-top">
                 <Modal dimmer='blurring' trigger={
-                    <div className="book-cover" 
-                        style={
-                            { 
-                                width: 128, 
-                                height: 193, 
-                                backgroundImage: `url("${book.imageLinks.thumbnail}")`
-                            }
-                        }>
-                    </div>
+                    <div className="book-cover" style={{ backgroundImage: `url("${book.imageLinks.thumbnail}")` }} />
                 }>
                     <Modal.Header>{book.title}</Modal.Header>
                     <Modal.Content image>

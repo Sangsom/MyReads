@@ -21,7 +21,7 @@ class BooksApp extends React.Component {
       books: state.books.map(book => book)
     }))
     BooksAPI.update(book, shelf);
-  }
+  } 
 
   moveFromSearch = (book, shelf) => {
     book.shelf = shelf;
