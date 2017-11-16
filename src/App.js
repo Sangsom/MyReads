@@ -17,9 +17,9 @@ class BooksApp extends React.Component {
 
   moveBook = (book, shelf) => {
     book.shelf = shelf;
-    this.setState((state) => ({
-      books: state.books.map(book => book)
-    }))
+    this.setState((state) => {
+      return { books: state.books.map(book => book) }
+    })
     BooksAPI.update(book, shelf);
   } 
 
@@ -31,7 +31,7 @@ class BooksApp extends React.Component {
     });
 
     this.setState((state) => {
-      books: newBooks
+      return { books: newBooks }
     });
 
     BooksAPI.update(book, shelf);
