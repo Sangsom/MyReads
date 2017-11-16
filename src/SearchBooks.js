@@ -31,6 +31,8 @@ export class SearchBooks extends Component {
         BooksAPI.search(cleanQuery).then(books => {
             if (books && !books.error) {
                 this.setState({ found: books });
+            } else if (query.length === 0) {
+                this.setState({ found: [] });
             }
         })
     }
