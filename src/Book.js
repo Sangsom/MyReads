@@ -44,7 +44,7 @@ export const Book = (props) => {
                 </Modal>
                 <ShelfChanger 
                     book={book} 
-                    moveBook={moveBook} 
+                    moveBook={moveBook}
                 />
             </div>
             <div className="book-title">{book.title}</div>
