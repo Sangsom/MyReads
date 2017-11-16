@@ -6,17 +6,20 @@ import { Book } from './Book';
 import sortBy from 'sort-by';
 
 export class SearchBooks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            found: [],
+            query: '',
+            mainBooks: []
+        }
+    }
+
     static propTypes = {
         mainBooks: PropTypes.array.isRequired,
         moveBook: PropTypes.func.isRequired
     }
-
-    state = {
-        found: [],
-        query: '',
-        mainBooks: []
-    }
-
+    
     componentDidMount() {
         this.setState({mainBooks: this.props.mainBooks});
     }
@@ -48,7 +51,6 @@ export class SearchBooks extends Component {
         const {found} = this.state;
         let booksFound = found.sort(sortBy('title'));
         
-
         // Iterate through found books and compare to books from main page and add correct book shelfs
         booksFound.map(book => {
             return this.getShelf(book.id) !== undefined ? book.shelf = this.getShelf(book.id) : book;

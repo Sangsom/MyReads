@@ -7,9 +7,13 @@ import { SearchBooks } from './SearchBooks';
 import './App.css'
 
 class BooksApp extends React.Component {
-  state = {
-    books: []
+  constructor (props) {
+    super(props);
+    this.state = {
+      books: []
+    }
   }
+  
 
   componentDidMount() {
     BooksAPI.getAll().then(books => this.setState({ books }));
