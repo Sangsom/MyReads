@@ -11,18 +11,13 @@ export class SearchBooks extends Component {
         super(props);
         this.state = {
             found: [],
-            query: '',
-            mainBooks: []
+            query: ''
         }
     }
 
     static propTypes = {
         mainBooks: PropTypes.array.isRequired,
         moveBook: PropTypes.func.isRequired
-    }
-    
-    componentDidMount() {
-        this.setState({mainBooks: this.props.mainBooks});
     }
 
     updateQuery (query) {
@@ -41,7 +36,7 @@ export class SearchBooks extends Component {
     // Helper function for finding book shelf from main page
     getShelf(id) {
         let bookshelf;
-        this.state.mainBooks.map(book => {
+        this.props.mainBooks.map(book => {
             if(book.id === id) {
                 bookshelf = book.shelf
             }
