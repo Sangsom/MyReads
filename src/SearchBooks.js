@@ -32,7 +32,7 @@ export class SearchBooks extends Component {
         BooksAPI.search(cleanQuery).then(books => {
             if (books && !books.error) {
                 this.setState({ found: books });
-            } else if (query.length === 0) {
+            } else if (query.length === 0 || books.error) {
                 this.setState({ found: [] });
             }
         })
@@ -80,7 +80,7 @@ export class SearchBooks extends Component {
                 <div className="search-books-results">
                     <ol className="books-grid">
                         { booksFound.map((book, index) => (
-                            <li key={index}>
+                            <li key={book.id}>
                                 <Book book={book} moveBook={this.props.moveBook} />
                             </li>
                         ))}
