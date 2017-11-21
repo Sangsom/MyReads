@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Main } from './Main';
 import * as BooksAPI from './BooksAPI';
 import { SearchBooks } from './SearchBooks';
+import { ErrorPage } from './ErrorPage';
 
 import './App.css'
 
@@ -14,7 +15,6 @@ class BooksApp extends React.Component {
     }
   }
   
-
   componentDidMount() {
     BooksAPI.getAll().then(books => this.setState({ books }));
   }
@@ -33,12 +33,15 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
+        <Switch>
           <Route exact path="/" render={() => (
             <Main books={books} moveBook={this.moveBook} />
           )} />
           <Route path="/search" render={() => (
             <SearchBooks mainBooks={books} moveBook={this.moveBook} />
           )} />
+          <Route component={ErrorPage} />
+        </Switch>
       </div>
     )
   }
