@@ -5,16 +5,17 @@ import { ShelfChanger } from './ShelfChanger';
 
 export const Book = (props) => {
     const {book, moveBook} = props;
+    const thumbnail = book.imageLinks ? book.imageLinks.thumbnail : 'http://via.placeholder.com/128x193?text=No%20Cover';
 
     return (
         <div className="book">
             <div className="book-top">
                 <Modal dimmer='blurring' trigger={
-                    <div className="book-cover" style={{ backgroundImage: `url("${book.imageLinks.thumbnail}")` }} />
+                    <div className="book-cover" style={{ backgroundImage: `url("${thumbnail}")` }} />
                 }>
                     <Modal.Header>{book.title}</Modal.Header>
                     <Modal.Content image>
-                        <Image wrapped src={book.imageLinks.thumbnail} />
+                        <Image wrapped src={thumbnail} />
                         <Modal.Description>
                             <p>{book.description}</p>
                             <p><strong>Publisher: </strong>{book.publisher}</p>
