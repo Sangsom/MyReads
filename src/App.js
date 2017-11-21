@@ -20,25 +20,12 @@ class BooksApp extends React.Component {
   }
 
   moveBook = (book, shelf) => {
-    book.shelf = shelf;
-    this.setState((state) => {
-      return { books: state.books.map(book => book) }
+    BooksAPI.update(book, shelf).then(() => {
+      book.shelf = shelf;
+      this.setState(state => ({ // Filter out books so they don't repeat and add new book to an array
+        books: state.books.filter(b => b.id !== book.id).concat([book])
+      }))
     })
-    BooksAPI.update(book, shelf);
-  } 
-
-  moveFromSearch = (book, shelf) => {
-    let newBooks = this.state.books.push(book);
-    newBooks = this.state.books.map(newBook => {
-      if (newBook.id === book.id) newBook.shelf = shelf;
-      return newBook;
-    });
-
-    this.setState((state) => {
-      return { books: newBooks }
-    });
-
-    BooksAPI.update(book, shelf);
   }
 
   render() {
@@ -50,7 +37,7 @@ class BooksApp extends React.Component {
             <Main books={books} moveBook={this.moveBook} />
           )} />
           <Route path="/search" render={() => (
-            <SearchBooks mainBooks={books} moveBook={this.moveFromSearch} />
+            <SearchBooks mainBooks={books} moveBook={this.moveBook} />
           )} />
       </div>
     )
