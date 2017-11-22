@@ -4,6 +4,9 @@ This is MyReads Project created for Udacity's React Fundamentals Nanodegree cour
 
 This project were created based on provided [starter template](https://github.com/udacity/reactnd-project-myreads-starter).
 
+## Try it on Github Pages
+MyReads Project can be viewed in [Github Pages](https://sangsom.github.io/MyReads/)
+
 ## Installation
 
 ### Clone from github
